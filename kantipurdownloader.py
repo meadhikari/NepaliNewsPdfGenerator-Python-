@@ -10,10 +10,10 @@ def date():
   now = datetime.datetime.now()
   return str(now.day) + str(now.month) + str(now.year)
 #kantipuractualurl = 'http://epaper.ekantipur.com/1732012/epaperpdf/1732012-md-hr-6.pdf'
-
+#ktmpostacturlurl = 'http://epaper.ekantipur.com/ktpost/%1$s/epaperpdf/%1$s-md-hr-%2$d.pdf'
 def totalpages():
   """Retruns the total pages of the paper by counting the pages from the xml file"""
-  file = urlopen('http://epaper.ekantipur.com/ktpost/' + date() +'/pages.xml')
+  file = urlopen('http://epaper.ekantipur.com/' + date() +'/pages.xml')
   data = file.read()
   return data.count('<page>')
 
