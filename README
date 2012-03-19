@@ -1,0 +1,5 @@
+Usage $ python downloadpaper.py papername
+  example python downloadpaper.py KTMPost 
+            python downloadpaper.py Kantipur
+Only two paper supported currently
+
