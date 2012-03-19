@@ -5,15 +5,17 @@ from pyPdf import PdfFileWriter, PdfFileReader
 import xml.etree
 from urllib2 import Request, urlopen
 from StringIO import StringIO 
-now = datetime.datetime.now()
-now = str(now.day) + str(now.month) + str(now.year)
+def date():
+  """This function returns the date in the format used by the url of the newspapers"""
+  now = datetime.datetime.now()
+  return str(now.day) + str(now.month) + str(now.year)
 kantipuractualurl = 'http://epaper.ekantipur.com/1732012/epaperpdf/1732012-md-hr-6.pdf'
-file = urlopen('http://epaper.ekantipur.com/ktpost/' + now +'/pages.xml')
+file = urlopen('http://epaper.ekantipur.com/ktpost/' + date() +'/pages.xml')
 data = file.read()
 pages = []
 count = data.count('<page>')
 for i in range(1,count+1):
-  pages.append('http://epaper.ekantipur.com/' + now + '/epaperpdf/' +now +'-md-hr-'+str(i) +'.pdf')
+  pages.append('http://epaper.ekantipur.com/' + date() + '/epaperpdf/' + date() +'-md-hr-'+str(i) +'.pdf')
 
 writer = PdfFileWriter()
 for i in pages:
@@ -25,6 +27,6 @@ for i in pages:
 		writer.addPage(currentPage)
 
 
-outputStream = open(filename+"(kantipur)"+".pdf","wb")
+outputStream = open(date()+"(kantipur)"+".pdf","wb")
 writer.write(outputStream)
 outputStream.close()
