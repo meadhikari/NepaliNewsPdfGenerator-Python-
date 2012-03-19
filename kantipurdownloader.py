@@ -16,7 +16,6 @@ def totalpages(papername):
   if papername == "Kantipur":
     file = urlopen('http://epaper.ekantipur.com/' + date() +'/pages.xml')
     data = file.read()
-    print data.count('<page>')
 
     return data.count('<page>')
 def pagelist(papername):
@@ -37,7 +36,7 @@ def pdfprinter(papername):
     pdfFile = PdfFileReader(memoryFile)
     currentPage = pdfFile.getPage(0) #just need the first page, we only have one page
     writer.addPage(currentPage)
-  outputStream = open(date()+"(kantipur)"+".pdf","wb")
+  outputStream = open(date()+"("+papername+")"+".pdf","wb")
   writer.write(outputStream)
   outputStream.close()
 
