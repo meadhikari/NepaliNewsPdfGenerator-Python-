@@ -6,15 +6,16 @@ import xml.etree
 from urllib2 import Request, urlopen
 from StringIO import StringIO 
 def date():
-  """This function returns the date in the format used by the url of the newspapers"""
+  """Returns the date in the format used by the url of the newspapers"""
   now = datetime.datetime.now()
   return str(now.day) + str(now.month) + str(now.year)
 kantipuractualurl = 'http://epaper.ekantipur.com/1732012/epaperpdf/1732012-md-hr-6.pdf'
-file = urlopen('http://epaper.ekantipur.com/ktpost/' + date() +'/pages.xml')
-data = file.read()
+def totalpages():
+  file = urlopen('http://epaper.ekantipur.com/ktpost/' + date() +'/pages.xml')
+  data = file.read()
+  return data.count('<page>')
 pages = []
-count = data.count('<page>')
-for i in range(1,count+1):
+for i in range(1,totalpages()+1):
   pages.append('http://epaper.ekantipur.com/' + date() + '/epaperpdf/' + date() +'-md-hr-'+str(i) +'.pdf')
 
 writer = PdfFileWriter()
